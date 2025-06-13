@@ -21,6 +21,7 @@ import {
   BookOpen,
   Files,
   Settings,
+  Bell,
   ChevronUp,
   User2,
   LogOut,
@@ -33,6 +34,11 @@ const menuItems = [
     title: "Dashboard",
     url: "/super-admin/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Profile",
+    url: "/super-admin/profile",
+    icon: User2,
   },
   {
     title: "Church Admins",
@@ -55,6 +61,11 @@ const menuItems = [
     icon: BookOpen,
   },
   {
+    title: "Notices",
+    url: "/super-admin/notices",
+    icon: Bell,
+  },
+  {
     title: "Files",
     url: "/super-admin/files",
     icon: Files,
@@ -73,7 +84,7 @@ export function SuperAdminSidebar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex items-center gap-2 px-2 py-2">
-          <Church className="w-8 h-8 text-blue-600" />
+          <Church className="w-8 h-8 text-purple-600" />
           <div>
             <h2 className="font-bold text-lg">Catholic Portal</h2>
             <p className="text-sm text-muted-foreground">Super Admin</p>

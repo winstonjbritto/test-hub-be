@@ -4,8 +4,42 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Church, Globe, MapPin, Menu, X } from "lucide-react"
+import { Globe, MapPin, Menu, X, Calendar } from "lucide-react"
 import { useAuth } from "@/components/providers/auth-provider"
+
+// Custom Cross Logo Component
+const CrossLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
+  <div className={`relative ${className}`}>
+    <svg viewBox="0 0 32 32" className="w-full h-full">
+      {/* Outer circle background */}
+      <circle
+        cx="16"
+        cy="16"
+        r="15"
+        className="text-purple-100"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+
+      {/* Cross */}
+      <g className="text-purple-600" fill="currentColor">
+        {/* Vertical beam */}
+        <rect x="14" y="6" width="4" height="20" rx="1" />
+        {/* Horizontal beam */}
+        <rect x="8" y="14" width="16" height="4" rx="1" />
+      </g>
+
+      {/* Inner glow effect */}
+      <circle cx="16" cy="16" r="12" className="text-purple-50" fill="currentColor" opacity="0.3" />
+
+      {/* Sacred heart accent */}
+      <g className="text-gold-500" fill="currentColor">
+        <circle cx="16" cy="16" r="2" opacity="0.8" />
+      </g>
+    </svg>
+  </div>
+)
 
 export function CommonHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,20 +55,27 @@ export function CommonHeader() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 font-bold text-xl">
-            <Church className="w-8 h-8 text-blue-600" />
-            <span>Catholic Portal</span>
+          <Link href="/" className="flex items-center gap-3 font-bold text-xl">
+            <CrossLogo className="w-10 h-10" />
+            <div className="flex flex-col">
+              <span className="text-purple-900 leading-tight">Catholic</span>
+              <span className="text-purple-600 text-sm leading-tight">Portal</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/churches" className="hover:text-blue-600 transition-colors">
+            <Link href="/churches" className="hover:text-purple-600 transition-colors">
               Churches
             </Link>
-            <Link href="/about" className="hover:text-blue-600 transition-colors">
+            <Link href="/masses" className="hover:text-purple-600 transition-colors flex items-center gap-1">
+              <Calendar className="w-4 h-4" />
+              Mass Times
+            </Link>
+            <Link href="/about" className="hover:text-purple-600 transition-colors">
               About
             </Link>
-            <Link href="/blogs" className="hover:text-blue-600 transition-colors">
+            <Link href="/blogs" className="hover:text-purple-600 transition-colors">
               Blogs
             </Link>
           </nav>
@@ -72,8 +113,11 @@ export function CommonHeader() {
             {/* Auth Buttons */}
             {user ? (
               <div className="flex items-center gap-2">
+                <Link href="/profile">
+                  <Button variant="outline">Profile</Button>
+                </Link>
                 <Link href={`/${user.role.replace("_", "-")}/dashboard`}>
-                  <Button variant="outline">Dashboard</Button>
+                  <Button variant="ghost">Dashboard</Button>
                 </Link>
                 <Button onClick={handleSignOut} variant="ghost">
                   Sign Out
@@ -85,7 +129,7 @@ export function CommonHeader() {
                   <Button variant="ghost">Sign In</Button>
                 </Link>
                 <Link href="/auth/signup">
-                  <Button>Sign Up</Button>
+                  <Button className="bg-purple-600 hover:bg-purple-700">Sign Up</Button>
                 </Link>
               </div>
             )}
@@ -101,21 +145,30 @@ export function CommonHeader() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t">
             <nav className="flex flex-col gap-4">
-              <Link href="/churches" className="hover:text-blue-600 transition-colors">
+              <Link href="/churches" className="hover:text-purple-600 transition-colors">
                 Churches
               </Link>
-              <Link href="/about" className="hover:text-blue-600 transition-colors">
+              <Link href="/masses" className="hover:text-purple-600 transition-colors flex items-center gap-1">
+                <Calendar className="w-4 h-4" />
+                Mass Times
+              </Link>
+              <Link href="/about" className="hover:text-purple-600 transition-colors">
                 About
               </Link>
-              <Link href="/blogs" className="hover:text-blue-600 transition-colors">
+              <Link href="/blogs" className="hover:text-purple-600 transition-colors">
                 Blogs
               </Link>
 
               <div className="flex flex-col gap-2 pt-4 border-t">
                 {user ? (
                   <>
-                    <Link href={`/${user.role.replace("_", "-")}/dashboard`}>
+                    <Link href="/profile">
                       <Button variant="outline" className="w-full">
+                        Profile
+                      </Button>
+                    </Link>
+                    <Link href={`/${user.role.replace("_", "-")}/dashboard`}>
+                      <Button variant="ghost" className="w-full">
                         Dashboard
                       </Button>
                     </Link>
@@ -131,7 +184,7 @@ export function CommonHeader() {
                       </Button>
                     </Link>
                     <Link href="/auth/signup">
-                      <Button className="w-full">Sign Up</Button>
+                      <Button className="w-full bg-purple-600 hover:bg-purple-700">Sign Up</Button>
                     </Link>
                   </>
                 )}

@@ -10,9 +10,10 @@ export interface User {
   email: string
   name: string
   role: UserRole
-  churchId?: string
+  churchIds?: string[] // Changed to support multiple churches
   isActive: boolean
   isApproved: boolean
+  avatar?: string
 }
 
 interface AuthContextType {
@@ -49,23 +50,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         role: "super_admin",
         isActive: true,
         isApproved: true,
+        avatar: "/placeholder.svg?height=40&width=40&text=SA",
       },
       {
         id: "2",
-        email: "admin@stmarys.com",
-        name: "Church Admin",
+        email: "admin@stmarys.com", // Changed from "admin@churches.com" to match demo credentials
+        name: "Father Michael Johnson",
         role: "church_admin",
-        churchId: "church1",
+        churchIds: ["church1", "church2", "church3"], // Multiple churches
         isActive: true,
         isApproved: true,
+        avatar: "/placeholder.svg?height=40&width=40&text=MJ",
       },
       {
         id: "3",
         email: "user@example.com",
-        name: "End User",
+        name: "John Smith",
         role: "end_user",
         isActive: true,
         isApproved: true,
+        avatar: "/placeholder.svg?height=40&width=40&text=JS",
       },
     ]
 
