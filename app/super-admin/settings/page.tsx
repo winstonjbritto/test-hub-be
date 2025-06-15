@@ -13,23 +13,13 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Palette, Settings, Bell, Shield, Mail, Save, RotateCcw, Eye, Monitor, Moon } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
-// import { useThemeContext } from "@/components/providers/theme-context"
+import { useThemeContext } from "@/components/providers/theme-context"
+import { ThemeDemo } from "@/components/common/theme-demo"
 
 export default function SuperAdminSettingsPage() {
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
-  // const { themeSettings, updateThemeSettings, resetThemeSettings } = useThemeContext()
-
-  // Theme settings state
-  const [themeSettings, setThemeSettings] = useState({
-    primaryColor: "purple",
-    accentColor: "blue",
-    darkMode: false,
-    colorScheme: "default",
-    borderRadius: "medium",
-    fontFamily: "inter",
-    compactMode: false,
-  })
+  const { themeSettings, updateThemeSettings, resetThemeSettings } = useThemeContext()
 
   // General settings state
   const [generalSettings, setGeneralSettings] = useState({
@@ -106,22 +96,6 @@ export default function SuperAdminSettingsPage() {
     }
   }
 
-  const handleResetTheme = () => {
-    setThemeSettings({
-      primaryColor: "purple",
-      accentColor: "blue",
-      darkMode: false,
-      colorScheme: "default",
-      borderRadius: "medium",
-      fontFamily: "inter",
-      compactMode: false,
-    })
-    toast({
-      title: "Theme reset",
-      description: "Theme settings have been reset to default values.",
-    })
-  }
-
   const previewTheme = () => {
     toast({
       title: "Theme preview",
@@ -179,7 +153,7 @@ export default function SuperAdminSettingsPage() {
                     <Label htmlFor="primaryColor">Primary Color</Label>
                     <Select
                       value={themeSettings.primaryColor}
-                      onValueChange={(value) => setThemeSettings({ ...themeSettings, primaryColor: value })}
+                      onValueChange={(value) => updateThemeSettings({ primaryColor: value })}
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -200,7 +174,7 @@ export default function SuperAdminSettingsPage() {
                     <Label htmlFor="accentColor">Accent Color</Label>
                     <Select
                       value={themeSettings.accentColor}
-                      onValueChange={(value) => setThemeSettings({ ...themeSettings, accentColor: value })}
+                      onValueChange={(value) => updateThemeSettings({ accentColor: value })}
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -231,10 +205,10 @@ export default function SuperAdminSettingsPage() {
                       key={scheme.value}
                       className={`cursor-pointer transition-all ${
                         themeSettings.colorScheme === scheme.value
-                          ? "ring-2 ring-purple-500 bg-purple-50"
+                          ? "ring-2 ring-[var(--theme-primary)] bg-[var(--theme-accent)]"
                           : "hover:bg-gray-50"
                       }`}
-                      onClick={() => setThemeSettings({ ...themeSettings, colorScheme: scheme.value })}
+                      onClick={() => updateThemeSettings({ colorScheme: scheme.value })}
                     >
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between">
@@ -260,7 +234,7 @@ export default function SuperAdminSettingsPage() {
                     <Label htmlFor="borderRadius">Border Radius</Label>
                     <Select
                       value={themeSettings.borderRadius}
-                      onValueChange={(value) => setThemeSettings({ ...themeSettings, borderRadius: value })}
+                      onValueChange={(value) => updateThemeSettings({ borderRadius: value })}
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -278,7 +252,7 @@ export default function SuperAdminSettingsPage() {
                     <Label htmlFor="fontFamily">Font Family</Label>
                     <Select
                       value={themeSettings.fontFamily}
-                      onValueChange={(value) => setThemeSettings({ ...themeSettings, fontFamily: value })}
+                      onValueChange={(value) => updateThemeSettings({ fontFamily: value })}
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -311,7 +285,7 @@ export default function SuperAdminSettingsPage() {
                     </div>
                     <Switch
                       checked={themeSettings.darkMode}
-                      onCheckedChange={(checked) => setThemeSettings({ ...themeSettings, darkMode: checked })}
+                      onCheckedChange={(checked) => updateThemeSettings({ darkMode: checked })}
                     />
                   </div>
                   <div className="flex items-center justify-between">
@@ -324,7 +298,7 @@ export default function SuperAdminSettingsPage() {
                     </div>
                     <Switch
                       checked={themeSettings.compactMode}
-                      onCheckedChange={(checked) => setThemeSettings({ ...themeSettings, compactMode: checked })}
+                      onCheckedChange={(checked) => updateThemeSettings({ compactMode: checked })}
                     />
                   </div>
                 </div>
@@ -339,7 +313,7 @@ export default function SuperAdminSettingsPage() {
                     <Eye className="w-4 h-4 mr-2" />
                     Preview
                   </Button>
-                  <Button variant="outline" onClick={handleResetTheme}>
+                  <Button variant="outline" onClick={resetThemeSettings}>
                     <RotateCcw className="w-4 h-4 mr-2" />
                     Reset to Default
                   </Button>
@@ -351,6 +325,7 @@ export default function SuperAdminSettingsPage() {
               </div>
             </CardContent>
           </Card>
+          <ThemeDemo />
         </TabsContent>
 
         <TabsContent value="general" className="space-y-6">

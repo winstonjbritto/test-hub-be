@@ -25,6 +25,7 @@ import {
   ChevronUp,
   User2,
   LogOut,
+  Heart,
 } from "lucide-react"
 import Link from "next/link"
 import { useAuth } from "@/components/providers/auth-provider"
@@ -54,6 +55,11 @@ const menuItems = [
     title: "Churches",
     url: "/super-admin/churches",
     icon: Church,
+  },
+  {
+    title: "Saints",
+    url: "/super-admin/saints",
+    icon: Heart,
   },
   {
     title: "Blogs",

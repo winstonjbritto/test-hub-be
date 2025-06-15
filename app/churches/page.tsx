@@ -19,6 +19,7 @@ export default function ChurchesPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [locationFilter, setLocationFilter] = useState("all")
   const [dioceseFilter, setDioceseFilter] = useState("all")
+  const [saintFilter, setSaintFilter] = useState("all")
 
   const [selectedChurch, setSelectedChurch, any] = useState(null)
   const [showMassModal, setShowMassModal] = useState(false)
@@ -91,6 +92,7 @@ export default function ChurchesPage() {
       email: "info@stmarys.com",
       description: "Historic cathedral serving the community since 1879 with beautiful Gothic architecture.",
       upcomingEvents: ["Christmas Eve Mass", "New Year Service"],
+      patronSaint: "Blessed Virgin Mary",
     },
     {
       id: "2",
@@ -139,6 +141,7 @@ export default function ChurchesPage() {
       email: "info@sacredheart.com",
       description: "Modern parish with vibrant community programs and youth activities.",
       upcomingEvents: ["Youth Group Meeting", "Bible Study"],
+      patronSaint: "Sacred Heart of Jesus",
     },
     {
       id: "3",
@@ -187,6 +190,7 @@ export default function ChurchesPage() {
       email: "info@stjoseph.com",
       description: "Family-friendly parish with excellent youth programs and community outreach.",
       upcomingEvents: ["Family Day", "Charity Drive"],
+      patronSaint: "Saint Joseph",
     },
     {
       id: "4",
@@ -242,6 +246,7 @@ export default function ChurchesPage() {
       email: "info@holytrinity.com",
       description: "Traditional parish with rich history and strong community bonds.",
       upcomingEvents: ["Advent Concert", "Christmas Bazaar"],
+      patronSaint: "Holy Trinity",
     },
   ]
 
@@ -285,10 +290,12 @@ export default function ChurchesPage() {
       const matchesSearch =
         church.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         church.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        church.pastor.toLowerCase().includes(searchTerm.toLowerCase())
+        church.pastor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        church.patronSaint.toLowerCase().includes(searchTerm.toLowerCase())
 
       const matchesLocation = locationFilter === "all" || church.address.includes(locationFilter)
       const matchesDiocese = dioceseFilter === "all" || church.diocese.includes(dioceseFilter)
+      const matchesSaint = saintFilter === "all" || church.patronSaint === saintFilter
 
       // Distance filtering
       let matchesRadius = true
@@ -302,7 +309,7 @@ export default function ChurchesPage() {
         matchesRadius = distance <= Number.parseInt(radiusFilter)
       }
 
-      return matchesSearch && matchesLocation && matchesDiocese && matchesRadius
+      return matchesSearch && matchesLocation && matchesDiocese && matchesSaint && matchesRadius
     })
     .map((church) => {
       // Add distance to each church if user location is available
@@ -353,7 +360,7 @@ export default function ChurchesPage() {
               <div className="relative">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-500 w-5 h-5" />
                 <Input
-                  placeholder="Search churches by name, location, or pastor..."
+                  placeholder="Search churches by name, location, pastor, or patron saint..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-12 pr-4 py-3 text-lg border-2 border-purple-200 rounded-xl focus:border-purple-400 focus:ring-2 focus:ring-purple-100 bg-white/80 backdrop-blur-sm shadow-sm"
@@ -390,6 +397,22 @@ export default function ChurchesPage() {
                       <SelectItem value="Los Angeles">Archdiocese of Los Angeles</SelectItem>
                       <SelectItem value="Chicago">Archdiocese of Chicago</SelectItem>
                       <SelectItem value="Boston">Archdiocese of Boston</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-purple-800">Patron Saint</label>
+                  <Select value={saintFilter} onValueChange={setSaintFilter}>
+                    <SelectTrigger className="border-2 border-purple-200 rounded-lg hover:border-purple-300 transition-colors bg-white/80 backdrop-blur-sm">
+                      <SelectValue placeholder="All Saints" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Saints</SelectItem>
+                      <SelectItem value="Blessed Virgin Mary">Blessed Virgin Mary</SelectItem>
+                      <SelectItem value="Sacred Heart of Jesus">Sacred Heart of Jesus</SelectItem>
+                      <SelectItem value="Saint Joseph">Saint Joseph</SelectItem>
+                      <SelectItem value="Holy Trinity">Holy Trinity</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -459,6 +482,7 @@ export default function ChurchesPage() {
                         setSearchTerm("")
                         setLocationFilter("all")
                         setDioceseFilter("all")
+                        setSaintFilter("all")
                         setRadiusFilter("all")
                       }}
                       className="w-full text-xs border-2 border-gray-200 hover:bg-gray-50 rounded-lg"
