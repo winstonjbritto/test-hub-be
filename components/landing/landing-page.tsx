@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, MapPin, Church, Calendar, Book, Heart, Globe, Clock, Star, Cross, Bookmark } from "lucide-react"
+import { Search, MapPin, Church, Calendar, Book, Heart, Clock, Star, Cross, Bookmark } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -336,20 +336,52 @@ export function LandingPage() {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <Tabs value={selectedLanguage} onValueChange={setSelectedLanguage} className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
-                <TabsTrigger value="english" className="flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
-                  English
-                </TabsTrigger>
-                <TabsTrigger value="spanish" className="flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
-                  Español
-                </TabsTrigger>
-                <TabsTrigger value="french" className="flex items-center gap-2">
-                  <Globe className="w-4 h-4" />
-                  Français
-                </TabsTrigger>
+            <div className="flex justify-end mb-8">
+              <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+                <SelectTrigger className="w-48 bg-white border-purple-200 focus:border-purple-500 focus:ring-purple-500">
+                  <SelectValue>
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">
+                        {selectedLanguage === "english" && "🇺🇸"}
+                        {selectedLanguage === "spanish" && "🇪🇸"}
+                        {selectedLanguage === "french" && "🇫🇷"}
+                      </span>
+                      <span className="font-medium">
+                        {selectedLanguage === "english" && "English"}
+                        {selectedLanguage === "spanish" && "Español"}
+                        {selectedLanguage === "french" && "Français"}
+                      </span>
+                    </div>
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent align="end" className="w-48">
+                  <SelectItem value="english" className="cursor-pointer">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🇺🇸</span>
+                      <span>English</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="spanish" className="cursor-pointer">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🇪🇸</span>
+                      <span>Español</span>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="french" className="cursor-pointer">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg">🇫🇷</span>
+                      <span>Français</span>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <Tabs value={selectedLanguage} defaultValue="english">
+              <TabsList className="hidden">
+                <TabsTrigger value="english">English</TabsTrigger>
+                <TabsTrigger value="spanish">Spanish</TabsTrigger>
+                <TabsTrigger value="french">French</TabsTrigger>
               </TabsList>
 
               {Object.entries(dailyDevotions).map(([lang, devotions]) => (
