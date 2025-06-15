@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
@@ -202,17 +203,23 @@ export default function ChurchAdminUsersPage() {
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
-                        <DropdownMenuItem>
-                          <Eye className="w-4 h-4 mr-2" />
-                          View Profile
+                        <DropdownMenuItem asChild>
+                          <Link href={`/church-admin/users/${user.id}/profile`} className="flex items-center">
+                            <Eye className="w-4 h-4 mr-2" />
+                            View Profile
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Edit className="w-4 h-4 mr-2" />
-                          Edit Details
+                        <DropdownMenuItem asChild>
+                          <Link href={`/church-admin/users/${user.id}/edit`} className="flex items-center">
+                            <Edit className="w-4 h-4 mr-2" />
+                            Edit Details
+                          </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <MessageCircle className="w-4 h-4 mr-2" />
-                          Send Message
+                        <DropdownMenuItem asChild>
+                          <Link href={`/church-admin/users/${user.id}/message`} className="flex items-center">
+                            <MessageCircle className="w-4 h-4 mr-2" />
+                            Send Message
+                          </Link>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
