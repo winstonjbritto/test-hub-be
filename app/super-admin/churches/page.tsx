@@ -232,7 +232,7 @@ export default function ChurchesPage() {
               No churches found matching your filters
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
               {filteredChurches.map((church) => (
                 <Card key={church.id} className="overflow-hidden">
                   <div className="aspect-video bg-gray-100">
