@@ -1,0 +1,195 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  CHURCH_ADMIN
+  USER
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  password          String
+  firstName         String
+  lastName          String
+  role              UserRole  @default(USER)
+  churchId          String?
+  church            Church?   @relation(fields: [churchId], references: [id], onDelete: SetNull)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  events            UserEvent[]
+  notifications     Notification[]
+
+  @@index([email])
+  @@index([churchId])
+}
+
+model Church {
+  id                String    @id @default(cuid())
+  name              String
+  description       String?
+  address           String
+  phone             String?
+  email             String?
+  website           String?
+  imageUrl          String?
+  latitude          Float?
+  longitude         Float?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  users             User[]
+  events            Event[]
+  massSchedules     MassSchedule[]
+  blogs             Blog[]
+  media             Media[]
+  documents         Document[]
+  notices           Notice[]
+
+  @@index([name])
+}
+
+model Event {
+  id                String    @id @default(cuid())
+  title             String
+  description       String?
+  startDate         DateTime
+  endDate           DateTime
+  location          String?
+  imageUrl          String?
+  churchId          String
+  church            Church    @relation(fields: [churchId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  attendees         UserEvent[]
+
+  @@index([churchId])
+  @@index([startDate])
+}
+
+model UserEvent {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId           String
+  event             Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  status            String    @default("registered") // registered, attended, cancelled
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@unique([userId, eventId])
+  @@index([userId])
+  @@index([eventId])
+}
+
+model MassSchedule {
+  id                String    @id @default(cuid())
+  dayOfWeek         String    // Monday, Tuesday, etc.
+  time              String    // HH:MM format
+  type              String?   // Regular, Special, Holiday, etc.
+  churchId          String
+  church            Church    @relation(fields: [churchId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([churchId])
+  @@index([dayOfWeek])
+}
+
+model Saint {
+  id                String    @id @default(cuid())
+  name              String
+  description       String?
+  feastDay          String?   // MM-DD format
+  imageUrl          String?
+  patronOf          String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([name])
+  @@index([feastDay])
+}
+
+model Blog {
+  id                String    @id @default(cuid())
+  title             String
+  content           String
+  excerpt           String?
+  imageUrl          String?
+  published         Boolean   @default(false)
+  churchId          String
+  church            Church    @relation(fields: [churchId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([churchId])
+  @@index([published])
+}
+
+model Media {
+  id                String    @id @default(cuid())
+  url               String
+  title             String?
+  description       String?
+  type              String    // image, video, audio
+  churchId          String
+  church            Church    @relation(fields: [churchId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([churchId])
+  @@index([type])
+}
+
+model Document {
+  id                String    @id @default(cuid())
+  title             String
+  url               String
+  description       String?
+  churchId          String
+  church            Church    @relation(fields: [churchId], references: [id], onDelete: Cascade)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([churchId])
+}
+
+model Notice {
+  id                String    @id @default(cuid())
+  title             String
+  content           String
+  type              String?   // announcement, warning, info
+  active            Boolean   @default(true)
+  churchId          String?
+  church            Church?   @relation(fields: [churchId], references: [id], onDelete: SetNull)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([churchId])
+  @@index([active])
+}
+
+model Notification {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title             String
+  message           String
+  read              Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([read])
+}
