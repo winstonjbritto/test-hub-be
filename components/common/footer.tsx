@@ -13,7 +13,7 @@ export function CommonFooter() {
   return (
     <footer className="bg-slate-950 text-white">
       {/* Top CTA Band */}
-      <div className="border-b border-white/8">
+      <div className="border-b border-white/10">
         <div className="container mx-auto px-4 max-w-7xl py-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -24,7 +24,7 @@ export function CommonFooter() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="px-4 py-2.5 rounded-xl bg-white/8 border border-white/12 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-64 transition-colors duration-200"
+                className="px-4 py-2.5 rounded-xl bg-white/10 border border-white/10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-64 transition-colors duration-200"
               />
               <button className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm rounded-xl transition-colors duration-200 flex items-center gap-2 flex-shrink-0">
                 Subscribe <ArrowRight className="w-4 h-4" />
@@ -49,7 +49,7 @@ export function CommonFooter() {
             <p className="text-slate-400 text-sm leading-relaxed mb-5 max-w-xs">
               Connecting Catholic communities worldwide through faith, fellowship, and service. Find your parish, join events and grow in faith.
             </p>
-            <div className="flex items-center gap-2 text-sm text-slate-400 bg-white/5 rounded-xl px-4 py-3 w-fit border border-white/8">
+            <div className="flex items-center gap-2 text-sm text-slate-400 bg-white/5 rounded-xl px-4 py-3 w-fit border border-white/10">
               <MessageCircle className="w-4 h-4 text-purple-400" />
               <span>Chat Support Available</span>
             </div>
@@ -102,19 +102,19 @@ export function CommonFooter() {
             <h3 className="font-semibold text-white text-sm uppercase tracking-widest mb-5">Contact</h3>
             <div className="space-y-4">
               <a href="mailto:info@catholicportal.com" className="flex items-start gap-3 text-slate-400 hover:text-white transition-colors duration-200 group">
-                <div className="w-8 h-8 bg-white/6 group-hover:bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
+                <div className="w-8 h-8 bg-white/10 group-hover:bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
                   <Mail className="w-4 h-4 text-purple-400" />
                 </div>
                 <span className="text-sm pt-1.5">info@catholicportal.com</span>
               </a>
               <a href="tel:+15551234567" className="flex items-start gap-3 text-slate-400 hover:text-white transition-colors duration-200 group">
-                <div className="w-8 h-8 bg-white/6 group-hover:bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
+                <div className="w-8 h-8 bg-white/10 group-hover:bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200">
                   <Phone className="w-4 h-4 text-purple-400" />
                 </div>
                 <span className="text-sm pt-1.5">+1 (555) 123-4567</span>
               </a>
               <div className="flex items-start gap-3 text-slate-400">
-                <div className="w-8 h-8 bg-white/6 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4 text-purple-400" />
                 </div>
                 <span className="text-sm pt-1.5">123 Faith Street, Holy City</span>
@@ -125,7 +125,7 @@ export function CommonFooter() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/8">
+      <div className="border-t border-white/10">
         <div className="container mx-auto px-4 max-w-7xl py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-slate-500 text-sm">
             &copy; {new Date().getFullYear()} Catholic Portal. All rights reserved.

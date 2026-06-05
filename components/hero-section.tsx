@@ -16,7 +16,7 @@ export function HeroSection({ onSearch }: HeroSectionProps) {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.pexels.com/photos/208371/pexels-photo-208371.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+          src="/images/church-interior.png"
           alt="Catholic Church Interior"
           className="w-full h-full object-cover"
         />
@@ -93,9 +93,9 @@ export function HeroSection({ onSearch }: HeroSectionProps) {
                 ].map(({ icon: Icon, label, sub }) => (
                   <div
                     key={label}
-                    className="flex items-center gap-3 bg-white/8 hover:bg-white/14 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:border-white/20 group"
+                    className="flex items-center gap-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 rounded-xl px-4 py-3 cursor-pointer transition-all duration-200 hover:scale-[1.02] hover:border-white/20 group"
                   >
-                    <div className="bg-white/15 group-hover:bg-amber-500/20 p-2 rounded-lg transition-colors duration-200">
+                    <div className="bg-white/20 group-hover:bg-amber-500/20 p-2 rounded-lg transition-colors duration-200">
                       <Icon className="w-4 h-4 text-amber-400" />
                     </div>
                     <div>

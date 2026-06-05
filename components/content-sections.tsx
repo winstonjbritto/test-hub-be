@@ -54,7 +54,7 @@ export function ContentSections() {
     description:
       "Discover how consistent, heartfelt prayer strengthens our faith, brings inner peace, and draws us closer to God through every season of life.",
     image:
-      "https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop",
+      "/images/prayer-hands.png",
   }
 
   return (

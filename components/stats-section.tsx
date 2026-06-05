@@ -70,7 +70,7 @@ export function StatsSection() {
             return (
               <div
                 key={index}
-                className="group relative text-center bg-white/5 hover:bg-white/8 border border-white/8 hover:border-white/15 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 cursor-default"
+                className="group relative text-center bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 cursor-default"
               >
                 {/* Icon */}
                 <div className={`${stat.iconBg} w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
