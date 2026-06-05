@@ -80,4 +80,23 @@ export default function CreateNoticeLoading() {
                   <Skeleton className="h-6 w-12" />
                 </div>
                 
-                <div\
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Skeleton className="h-4 w-24 mb-1" />
+                    <Skeleton className="h-4 w-48" />
+                  </div>
+                  <Skeleton className="h-6 w-12" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t">
+            <Skeleton className="h-10 w-24" />
+            <Skeleton className="h-10 w-32" />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}

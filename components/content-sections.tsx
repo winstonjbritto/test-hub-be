@@ -1,113 +1,113 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Clock, CalendarDays, User } from "lucide-react"
+import { Clock, User, CalendarDays, ArrowRight, MapPin } from "lucide-react"
 import Link from "next/link"
 
 export function ContentSections() {
   const upcomingEvents = [
     {
       id: 1,
-      date: "MAY 24",
+      month: "MAY",
+      day: "24",
       title: "Pentecost Sunday Celebration",
-      time: "May 24, 2025 • All Day",
+      time: "All Day",
       location: "St. Mary's Church, Bangalore",
-      image: "/images/church-interior.png",
+      tag: "Feast",
+      tagColor: "bg-amber-100 text-amber-700",
     },
     {
       id: 2,
-      date: "JUN 02",
+      month: "JUN",
+      day: "02",
       title: "Eucharistic Adoration",
-      time: "June 02, 2025 • 6:00 PM",
+      time: "6:00 PM",
       location: "St. Joseph's Church, Bangalore",
-      image: "/images/stained-glass.png",
+      tag: "Prayer",
+      tagColor: "bg-blue-100 text-blue-700",
     },
     {
       id: 3,
-      date: "JUN 15",
+      month: "JUN",
+      day: "15",
       title: "Feast of the Sacred Heart",
-      time: "June 15, 2025 • All Day",
+      time: "All Day",
       location: "Holy Trinity Church, Bangalore",
-      image: "/images/prayer-hands.png",
+      tag: "Feast",
+      tagColor: "bg-rose-100 text-rose-700",
     },
   ]
 
   const massTimes = [
-    {
-      time: "06:00 AM",
-      language: "Tamil Mass",
-      priest: "Fr. Joseph",
-      church: "St. Mary's Church",
-    },
-    {
-      time: "08:00 AM",
-      language: "English Mass",
-      priest: "Fr. John",
-      church: "St. Mary's Church",
-    },
-    {
-      time: "10:00 AM",
-      language: "Malayalam Mass",
-      priest: "Fr. Tom",
-      church: "St. Joseph's Church",
-    },
-    {
-      time: "06:00 PM",
-      language: "English Mass",
-      priest: "Fr. George",
-      church: "Holy Trinity Church",
-    },
-    {
-      time: "07:30 PM",
-      language: "Tamil Mass",
-      priest: "Fr. Xavier",
-      church: "St. Antony's Church",
-    },
+    { time: "06:00 AM", language: "Tamil", priest: "Fr. Joseph", church: "St. Mary's" },
+    { time: "08:00 AM", language: "English", priest: "Fr. John", church: "St. Mary's" },
+    { time: "10:00 AM", language: "Malayalam", priest: "Fr. Tom", church: "St. Joseph's" },
+    { time: "06:00 PM", language: "English", priest: "Fr. George", church: "Holy Trinity" },
+    { time: "07:30 PM", language: "Tamil", priest: "Fr. Xavier", church: "St. Antony's" },
   ]
 
   const featuredBlog = {
     category: "FAITH",
     date: "May 20, 2025",
     title: "The Power of Prayer in Daily Life",
-    description: "Discover how prayer strengthens our faith and brings us closer to God every day.",
-    readMore: "Read More →",
-    image: "/images/prayer-hands.png",
+    description:
+      "Discover how consistent, heartfelt prayer strengthens our faith, brings inner peace, and draws us closer to God through every season of life.",
+    image:
+      "https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=800&h=500&fit=crop",
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-20 bg-slate-50">
       <div className="container mx-auto px-4 max-w-7xl">
+        {/* Section Header */}
+        <div className="text-center mb-14">
+          <p className="text-purple-600 text-sm font-semibold tracking-widest uppercase mb-2">Stay Connected</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">What's Happening in Your Parish</h2>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
           {/* Upcoming Events */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900">Upcoming Events</h3>
+              <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <CalendarDays className="w-5 h-5 text-purple-600" />
+                Upcoming Events
+              </h3>
               <Link href="/events">
-                <Button variant="link" className="text-gray-600 hover:text-gray-900 p-0">
-                  View All
+                <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 text-xs font-medium -mr-2">
+                  View All <ArrowRight className="w-3 h-3 ml-1" />
                 </Button>
               </Link>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {upcomingEvents.map((event) => (
-                <Card key={event.id} className="overflow-hidden hover:shadow-lg transition-shadow border-0">
-                  <div className="flex gap-4">
-                    <div className="w-24 h-24 flex-shrink-0 bg-gray-200">
-                      <img
-                        src={event.image}
-                        alt={event.title}
-                        className="w-full h-full object-cover"
-                      />
+                <div
+                  key={event.id}
+                  className="group flex gap-4 bg-white rounded-2xl p-4 shadow-sm hover:shadow-md border border-slate-100 hover:border-purple-100 transition-all duration-200 cursor-pointer"
+                >
+                  {/* Date Block */}
+                  <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-600 to-purple-700 rounded-xl flex flex-col items-center justify-center shadow-sm">
+                    <span className="text-purple-200 text-[10px] font-bold uppercase leading-none">{event.month}</span>
+                    <span className="text-white text-xl font-bold leading-tight">{event.day}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <h4 className="font-semibold text-slate-900 text-sm line-clamp-2 group-hover:text-purple-700 transition-colors duration-200 leading-tight">
+                        {event.title}
+                      </h4>
                     </div>
-                    <div className="flex-1 py-3 pr-4">
-                      <div className="text-sm font-bold text-gray-500 mb-1">{event.date}</div>
-                      <h4 className="font-semibold text-gray-900 mb-2 line-clamp-2">{event.title}</h4>
-                      <p className="text-xs text-gray-600">{event.location}</p>
+                    <div className="flex items-center gap-1 text-xs text-slate-500 mb-1.5">
+                      <Clock className="w-3 h-3 flex-shrink-0" />
+                      <span>{event.time}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-xs text-slate-500">
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{event.location}</span>
                     </div>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
@@ -115,80 +115,85 @@ export function ContentSections() {
           {/* Today's Mass Timings */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900">Today's Mass Timings</h3>
+              <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Clock className="w-5 h-5 text-purple-600" />
+                Today's Masses
+              </h3>
               <Link href="/masses">
-                <Button variant="link" className="text-gray-600 hover:text-gray-900 p-0">
-                  View All
+                <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 text-xs font-medium -mr-2">
+                  View All <ArrowRight className="w-3 h-3 ml-1" />
                 </Button>
               </Link>
             </div>
-            <Card className="border-0">
-              <CardContent className="p-0">
-                <div className="divide-y">
-                  {massTimes.map((mass, index) => (
-                    <div key={index} className="p-4 flex items-start gap-4 hover:bg-gray-50 transition-colors">
-                      <div className="flex-shrink-0 flex items-center justify-center">
-                        <Clock className="w-5 h-5 text-gray-400" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-semibold text-gray-900">{mass.time}</span>
-                          <span className="text-xs font-medium text-gray-500">{mass.language}</span>
-                        </div>
-                        <div className="flex gap-4 text-xs text-gray-600">
-                          <span className="flex items-center gap-1">
-                            <User className="w-3 h-3" />
-                            {mass.priest}
-                          </span>
-                          <span>{mass.church}</span>
-                        </div>
-                      </div>
+            <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+              {massTimes.map((mass, index) => (
+                <div
+                  key={index}
+                  className="group flex items-center gap-4 px-5 py-4 hover:bg-purple-50/50 transition-colors duration-150 cursor-pointer border-b border-slate-50 last:border-0"
+                >
+                  <div className="flex-shrink-0 text-center w-16">
+                    <span className="text-sm font-bold text-purple-700 leading-none">{mass.time}</span>
+                  </div>
+                  <div className="w-px h-8 bg-slate-100 flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-sm font-semibold text-slate-800 truncate">{mass.language}</span>
+                      <span className="text-xs text-slate-400 flex-shrink-0 flex items-center gap-1">
+                        <User className="w-3 h-3" />
+                        {mass.priest}
+                      </span>
                     </div>
-                  ))}
+                    <p className="text-xs text-slate-500 truncate mt-0.5">{mass.church}</p>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              ))}
+            </div>
           </div>
 
           {/* Featured Blog */}
           <div>
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900">Featured Blog</h3>
+              <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <svg className="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                Featured Blog
+              </h3>
               <Link href="/blogs">
-                <Button variant="link" className="text-gray-600 hover:text-gray-900 p-0">
-                  View All
+                <Button variant="ghost" size="sm" className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 text-xs font-medium -mr-2">
+                  View All <ArrowRight className="w-3 h-3 ml-1" />
                 </Button>
               </Link>
             </div>
-            <Card className="overflow-hidden border-0 h-full">
-              <div className="aspect-video bg-gray-200 mb-4">
-                <img
-                  src={featuredBlog.image}
-                  alt={featuredBlog.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardContent className="space-y-4">
-                <Badge variant="secondary" className="bg-slate-900 text-white hover:bg-slate-800">
-                  {featuredBlog.category}
-                </Badge>
-                <div>
-                  <h4 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
+            <Link href="/blogs">
+              <div className="group bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md hover:border-purple-100 overflow-hidden transition-all duration-200 cursor-pointer">
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <img
+                    src={featuredBlog.image}
+                    alt={featuredBlog.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent" />
+                  <span className="absolute top-3 left-3 bg-purple-600 text-white text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full">
+                    {featuredBlog.category}
+                  </span>
+                </div>
+                <div className="p-5">
+                  <h4 className="font-bold text-slate-900 text-base leading-snug mb-2 group-hover:text-purple-700 transition-colors duration-200 line-clamp-2">
                     {featuredBlog.title}
                   </h4>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                  <p className="text-sm text-slate-500 line-clamp-3 leading-relaxed mb-4">
                     {featuredBlog.description}
                   </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-slate-400">{featuredBlog.date}</span>
+                    <span className="text-sm font-semibold text-purple-600 flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                      Read More <ArrowRight className="w-3.5 h-3.5" />
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">{featuredBlog.date}</span>
-                  <Link href="/blogs" className="text-slate-900 text-sm font-semibold hover:underline">
-                    {featuredBlog.readMore}
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </Link>
           </div>
+
         </div>
       </div>
     </section>

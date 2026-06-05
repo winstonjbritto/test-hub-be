@@ -3,24 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-  Globe,
-  Menu,
-  X,
-  Calendar,
-  ChevronDown,
-  LogOut,
-  User,
-  Bell,
-  Search,
-  Home,
-  Church,
-  Settings,
-  BookOpen,
-  MapPin,
-  Loader2,
-  Check,
-} from "lucide-react"
+import { Globe, Menu, X, Calendar, ChevronDown, LogOut, User, Bell, Search, Chrome as Home, Church, Settings, BookOpen, MapPin, Loader as Loader2, Check } from "lucide-react"
 import { useAuth } from "@/components/providers/auth-provider"
 import {
   DropdownMenu,
@@ -1140,6 +1123,7 @@ export function CommonHeader() {
             </div>
           </div>
         )}
+      </div>
     </header>
   )
 }
